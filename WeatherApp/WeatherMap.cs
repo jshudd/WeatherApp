@@ -15,8 +15,11 @@ namespace WeatherApp
 
             var response = client.GetStringAsync(apiCall).Result;
 
-            var kelvin = double.Parse(JObject.Parse(response)["main"]["temp"].ToString());
-            return (kelvin - 273.15) * (9 / 5) + 32;
+            //var kelvin = double.Parse(JObject.Parse(response)["main"]["temp"].ToString());
+            //return (kelvin - 273.15) * (9 / 5) + 32;
+            var temp = double.Parse(JObject.Parse(response)["main"]["temp"].ToString());
+
+            return temp;
         }
     }
 }
