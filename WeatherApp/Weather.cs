@@ -18,6 +18,8 @@ namespace WeatherApp
         public double Humidity { get; set; }
         public double WindSpeed { get; set; }
         public string CityName { get; set; }
+        public DateTime Sunrise { get; set; }
+        public DateTime Sunset { get; set; }
 
         public void GetAPIResponse(string zipCode)
         {
@@ -45,7 +47,7 @@ namespace WeatherApp
 
         public void GetCondition()
         {
-            this.Condition = JObject.Parse(this.APIResponse)["weather"]["main"].ToString();
+            this.Condition = JObject.Parse(this.APIResponse)["weather"][0]["main"].ToString();
         }
 
         public void GetHumidity()
@@ -63,14 +65,28 @@ namespace WeatherApp
             CityName = JObject.Parse(APIResponse)["name"].ToString();
         }
 
+        public void GetSunriseAndSunset()
+        {
+            var sunrise = long.Parse(JObject.Parse(APIResponse)["sys"]["sunrise"].ToString());
+            var sunriseOffset = DateTimeOffset.FromUnixTimeSeconds(sunrise);
+            this.Sunrise = sunriseOffset.DateTime;
+
+            
+
+            var sunset = long.Parse(JObject.Parse(APIResponse)["sys"]["sunset"].ToString());
+            var sunsetOffset = DateTimeOffset.FromUnixTimeSeconds(sunset);
+            this.Sunset = sunsetOffset.DateTime;
+        }
+
         public void GetWeather()
         {
             GetCityName();
             GetTemp();
             GetHeatIndex();
-            //GetCondition();
+            GetCondition();
             GetHumidity();
             GetWindSpeed();
+            GetSunriseAndSunset();
         }
     }
 }

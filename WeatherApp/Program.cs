@@ -9,15 +9,14 @@ namespace WeatherApp
     {
         static void Main(string[] args)
         {
+            //EXERCISE CODE BELOW
+
             //string key = File.ReadAllText("appsettings.json");
             //string APIkey = JObject.Parse(key).GetValue("DefaultKey").ToString();
 
             //Console.WriteLine("Please enter your zipcode: ");
             //string zipCode = Console.ReadLine();
-            ////Console.WriteLine("Please enter your country code: ");
-            ////string countryCode = Console.ReadLine().ToLower();
-
-            ////string apiCall = $"https://api.openweathermap.org/data/2.5/weather?zip={zipCode},{countryCode}&appid={APIkey}";
+            
             //string apiCall = $"https://api.openweathermap.org/data/2.5/weather?zip={zipCode}&units=imperial&appid={APIkey}";
 
             //Console.WriteLine();
@@ -39,9 +38,11 @@ namespace WeatherApp
                 Console.WriteLine($"Current weather for {wx.CityName}");
                 Console.WriteLine($"Temperature: {wx.Temperature}°");
                 Console.WriteLine($"Heat Index: {wx.HeatIndex}°");
-                //Console.WriteLine($"Condition: {wx.Condition}");
+                Console.WriteLine($"Condition: {wx.Condition}");
                 Console.WriteLine($"Humidity: {wx.Humidity}");
                 Console.WriteLine($"Wind Speed: {wx.WindSpeed} mph");
+                Console.WriteLine($"Sunrise: {wx.Sunrise.ToLocalTime().ToShortTimeString()}");
+                Console.WriteLine($"Sunset: {wx.Sunset.ToLocalTime().ToShortTimeString()}");
                 Console.WriteLine();
                 //Thread.Sleep(5000);
 
